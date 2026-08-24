@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Your Turn · 60 Seconds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0E0A0B;--ink-2:#15100F;--scarlet:#CC0000;--ember:#FF5A4E;
+  --bone:#F5F0EA;--stone:#939598;--amber:#D9A441;--line:rgba(245,240,234,.11);
+  --f-display:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --f-serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+html{-webkit-text-size-adjust:100%;}
+body{
+  min-height:100%;background:
+    radial-gradient(ellipse 90% 40% at 80% 0%,rgba(204,0,0,.15),transparent 60%),
+    linear-gradient(170deg,#0E0A0B 0%,#160F0F 55%,#0E0A0B 100%);
+  background-attachment:fixed;color:var(--bone);font-family:var(--f-serif);
+  padding:22px 18px 48px;
+}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important;}}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:20px;}
+
+header{display:flex;flex-direction:column;gap:12px;}
+.badge{align-self:flex-start;background:var(--scarlet);color:#fff;font-family:var(--f-mono);
+  font-size:14px;font-weight:500;letter-spacing:.14em;padding:8px 15px;border-radius:3px;}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(34px,8vw,48px);
+  line-height:1.03;letter-spacing:-.03em;text-wrap:balance;}
+h1 em{font-family:var(--f-serif);font-style:italic;font-weight:300;color:var(--ember);}
+.lede{font-family:var(--f-serif);font-weight:300;font-size:21px;line-height:1.55;color:var(--stone);}
+
+.assign{background:var(--ink-2);border:1px solid var(--line);border-left:4px solid var(--scarlet);
+  border-radius:10px;padding:16px 18px;}
+.assign-l{font-family:var(--f-mono);font-size:14px;letter-spacing:.12em;color:var(--stone);margin-bottom:8px;}
+.assign-t{font-family:var(--f-serif);font-weight:300;font-size:23px;line-height:1.4;}
+
+.timer{display:flex;align-items:center;gap:16px;background:var(--ink-2);border:1px solid var(--line);
+  border-radius:12px;padding:16px 20px;cursor:pointer;user-select:none;
+  -webkit-tap-highlight-color:transparent;}
+.timer:active{transform:scale(.99);}
+.t-num{font-family:var(--f-mono);font-weight:500;font-size:52px;line-height:1;
+  font-variant-numeric:tabular-nums;min-width:86px;}
+.t-num.hot{color:var(--ember);}
+.t-lbl{font-family:var(--f-mono);font-size:15px;letter-spacing:.1em;color:var(--stone);line-height:1.6;}
+
+section{display:flex;flex-direction:column;gap:10px;}
+.s-head{font-family:var(--f-mono);font-size:15px;letter-spacing:.11em;line-height:1.6;}
+section:nth-of-type(1) .s-head{color:#6FB6FF;}
+section:nth-of-type(2) .s-head{color:var(--amber);}
+section:nth-of-type(3) .s-head{color:var(--ember);}
+.opt{display:block;width:100%;text-align:left;font:inherit;cursor:pointer;
+  padding:15px 18px;border-radius:10px;background:rgba(245,240,234,.04);
+  border:1px solid var(--line);color:rgba(245,240,234,.76);
+  font-family:var(--f-serif);font-weight:300;font-size:22px;line-height:1.35;
+  transition:background .15s,border-color .15s,color .15s;-webkit-tap-highlight-color:transparent;}
+.opt:hover{border-color:rgba(245,240,234,.3);}
+.opt.on{background:rgba(204,0,0,.18);border-color:var(--scarlet);color:var(--bone);}
+:focus-visible{outline:2px solid var(--ember);outline-offset:3px;}
+
+.result{background:#1E1011;border:1px solid rgba(204,0,0,.45);border-radius:12px;
+  padding:20px 22px;font-family:var(--f-serif);font-weight:300;font-size:23px;line-height:1.6;
+  position:sticky;bottom:12px;box-shadow:0 -8px 28px rgba(14,10,11,.9),0 4px 18px rgba(0,0,0,.5);}
+.slot{color:rgba(147,149,152,.6);border-bottom:1px solid rgba(147,149,152,.45);padding:0 3px;}
+.slot.filled{color:var(--ember);border-bottom-color:var(--scarlet);font-style:italic;}
+.result-l{font-family:var(--f-mono);font-size:13px;letter-spacing:.13em;color:var(--ember);margin-bottom:10px;}
+
+footer{font-family:var(--f-mono);font-size:14px;letter-spacing:.05em;color:rgba(147,149,152,.55);
+  line-height:1.8;text-align:center;padding-top:8px;border-top:1px solid var(--line);}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="badge">FACULTY PRACTICE · 60 SECONDS</span>
+    <h1>Make <em>one</em> intentional change</h1>
+    <p class="lede">Don't redesign the course. Pick one option from each of the three sections — your sentence builds itself at the bottom.</p>
+  </header>
+
+  <div class="assign">
+    <div class="assign-l">THE ASSIGNMENT</div>
+    <div class="assign-t">Read Chapter 5 and write a 1,500-word summary.</div>
+  </div>
+
+  <div class="timer" id="timer">
+    <div class="t-num" id="tnum">60</div>
+    <div class="t-lbl" id="tlbl">TAP TO START<br>THE CLOCK</div>
+  </div>
+
+  <section>
+    <div class="s-head">01 · WHAT COULD THE AGENT DO?<br>(grounded in your materials)</div>
+    <button class="opt" onclick="pick(0,'explain the reading in the students\' own vocabulary',this)">Explain the reading</button>
+    <button class="opt" onclick="pick(0,'answer questions using only our course materials',this)">Answer from course materials</button>
+    <button class="opt" onclick="pick(0,'generate fresh examples from the chapter',this)">Generate examples</button>
+    <button class="opt" onclick="pick(0,'compare two concepts side by side',this)">Compare two concepts</button>
+    <button class="opt" onclick="pick(0,'argue the strongest counterposition',this)">Argue the counterposition</button>
+  </section>
+
+  <section>
+    <div class="s-head">02 · WHAT COULD UDL ADD?<br>(more ways in, same objective)</div>
+    <button class="opt" onclick="pick(1,'a plain-language version',this)">Plain-language version</button>
+    <button class="opt" onclick="pick(1,'a visual or spatial representation',this)">Visual representation</button>
+    <button class="opt" onclick="pick(1,'audio with a full transcript',this)">Audio + transcript</button>
+    <button class="opt" onclick="pick(1,'interactive retrieval practice',this)">Interactive practice</button>
+    <button class="opt" onclick="pick(1,'a choice of final format',this)">Choice of final format</button>
+  </section>
+
+  <section>
+    <div class="s-head">03 · WHAT MUST THE STUDENT STILL DO?</div>
+    <button class="opt" onclick="pick(2,'evaluate what it gave them',this)">Evaluate</button>
+    <button class="opt" onclick="pick(2,'apply it to a new case',this)">Apply</button>
+    <button class="opt" onclick="pick(2,'explain their reasoning out loud',this)">Explain</button>
+    <button class="opt" onclick="pick(2,'create something it could not',this)">Create</button>
+    <button class="opt" onclick="pick(2,'reflect on what changed in their thinking',this)">Reflect</button>
+  </section>
+
+  <div class="result">
+    <div class="result-l">YOUR REDESIGN</div>
+    The agent will <span class="slot" id="p0">___________</span>. Students reach it through <span class="slot" id="p1">___________</span>. But every student must still <span class="slot" id="p2">___________</span>.
+  </div>
+
+  <footer>
+    CLARK AI AND PEDAGOGY LAB · SOCR-AI-TIC LAB<br>Make Learning Visible · Shekhar Dash
+  </footer>
+</div>
+
+<script>
+function pick(col,val,el){
+  el.parentElement.querySelectorAll('.opt').forEach(o=>o.classList.remove('on'));
+  el.classList.add('on');
+  var s=document.getElementById('p'+col);
+  s.textContent=val;s.classList.add('filled');
+  try{localStorage.setItem('clark-turn-'+col,val);}catch(e){}
+}
+try{
+  [0,1,2].forEach(function(i){
+    var v=localStorage.getItem('clark-turn-'+i);
+    if(!v)return;
+    var s=document.getElementById('p'+i);s.textContent=v;s.classList.add('filled');
+    document.querySelectorAll('section')[i].querySelectorAll('.opt').forEach(function(o){
+      if(o.getAttribute('onclick').indexOf(v.replace(/'/g,"\\'"))>-1)o.classList.add('on');
+    });
+  });
+}catch(e){}
+
+var left=60,run=false,iv=null;
+function paint(){
+  var n=document.getElementById('tnum');
+  n.textContent=left;n.classList.toggle('hot',left<=10);
+  document.getElementById('tlbl').innerHTML=
+    left===0?'PENS DOWN':(run?'SECONDS<br>LEFT':'TAP TO START<br>THE CLOCK');
+}
+document.getElementById('timer').onclick=function(){
+  if(run){run=false;clearInterval(iv);paint();return;}
+  if(left===0)left=60;
+  run=true;
+  iv=setInterval(function(){left--;paint();if(left<=0){clearInterval(iv);run=false;paint();}},1000);
+  paint();
+};
+paint();
+</script>
+
+</body>
+</html>
