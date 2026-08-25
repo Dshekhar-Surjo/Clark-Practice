@@ -63,6 +63,10 @@ section:nth-of-type(3) .s-head{color:var(--ember);}
 .opt.on{background:rgba(204,0,0,.18);border-color:var(--scarlet);color:var(--bone);}
 :focus-visible{outline:2px solid var(--ember);outline-offset:3px;}
 
+section.open{background:rgba(204,0,0,.08);border:1px solid rgba(204,0,0,.4);border-radius:12px;padding:16px 18px;}
+.open-q{font-family:var(--f-display);font-weight:800;font-size:24px;letter-spacing:-.02em;color:var(--ember);}
+.open-b{font-family:var(--f-serif);font-weight:300;font-size:21px;line-height:1.5;color:rgba(245,240,234,.82);}
+.open-hint{font-family:var(--f-mono);font-size:14px;letter-spacing:.08em;color:var(--stone);margin-top:4px;}
 .result{background:#1E1011;border:1px solid rgba(204,0,0,.45);border-radius:12px;
   padding:20px 22px;font-family:var(--f-serif);font-weight:300;font-size:23px;line-height:1.6;
   position:sticky;bottom:12px;box-shadow:0 -8px 28px rgba(14,10,11,.9),0 4px 18px rgba(0,0,0,.5);}
@@ -80,7 +84,7 @@ footer{font-family:var(--f-mono);font-size:14px;letter-spacing:.05em;color:rgba(
   <header>
     <span class="badge">FACULTY PRACTICE · 60 SECONDS</span>
     <h1>Make <em>one</em> intentional change</h1>
-    <p class="lede">Don't redesign the course. Pick one option from each of the three sections — your sentence builds itself at the bottom.</p>
+    <p class="lede">Don't redesign the course. One intentional change — your commitment builds itself at the bottom.</p>
   </header>
 
   <div class="assign">
@@ -111,18 +115,17 @@ footer{font-family:var(--f-mono);font-size:14px;letter-spacing:.05em;color:rgba(
     <button class="opt" onclick="pick(1,'a choice of final format',this)">Choice of final format</button>
   </section>
 
-  <section>
-    <div class="s-head">03 · WHAT MUST THE STUDENT STILL DO?</div>
-    <button class="opt" onclick="pick(2,'evaluate what it gave them',this)">Evaluate</button>
-    <button class="opt" onclick="pick(2,'apply it to a new case',this)">Apply</button>
-    <button class="opt" onclick="pick(2,'explain their reasoning out loud',this)">Explain</button>
-    <button class="opt" onclick="pick(2,'create something it could not',this)">Create</button>
-    <button class="opt" onclick="pick(2,'reflect on what changed in their thinking',this)">Reflect</button>
+  <section class="open">
+    <div class="s-head">03 · IN YOUR COURSE, THIS SEMESTER —<br>WHAT MUST THE STUDENT STILL DO?</div>
+    <div class="open-q">No menu for this one.</div>
+    <div class="open-b">Evaluate <i>what</i>? Apply it to <i>which</i> case? Defend it to <i>whom</i>?</div>
+    <div class="open-hint">Say it out loud when the clock stops.</div>
   </section>
 
   <div class="result">
     <div class="result-l">YOUR REDESIGN</div>
-    The agent will <span class="slot" id="p0">___________</span>. Students reach it through <span class="slot" id="p1">___________</span>. But every student must still <span class="slot" id="p2">___________</span>.
+    <span style="display:block;font-family:var(--f-mono);font-size:14px;letter-spacing:.13em;color:var(--ember);margin-bottom:8px;">BY FRIDAY, IN ONE COURSE, I WILL:</span>
+    let the agent <span class="slot" id="p0">___________</span>, reached through <span class="slot" id="p1">___________</span> — and my students will still have to <span class="slot filled" id="p2">say it out loud</span>.
   </div>
 
   <footer>
